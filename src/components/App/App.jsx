@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ContactList from '../ContactList/ContactList';
 import css from './App.module.css';
+import SearchBox from '../SearchBox/SearchBox';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -11,12 +12,19 @@ const initialContacts = [
 
 export default function App() {
   const [contacts, setContacts] = useState(initialContacts);
+  const [filter, setFilter] = useState('');
+
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
 
-      <ContactList items={contacts} />
+      <SearchBox value={filter} onFilter={setFilter} />
+
+      <ContactList items={visibleContacts} />
     </div>
   );
 }
