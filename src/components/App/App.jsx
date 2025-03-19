@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ContactList from '../ContactList/ContactList';
 import css from './App.module.css';
 import SearchBox from '../SearchBox/SearchBox';
+import ContactForm from '../ContactForm/ContactForm';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -18,12 +19,19 @@ export default function App() {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  const addContact = newContact => {
+    setContacts(prevContacts => {
+      return [...prevContacts, newContact];
+    });
+  };
+
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
 
-      <SearchBox value={filter} onFilter={setFilter} />
+      <ContactForm onAdd={addContact} />
 
+      <SearchBox value={filter} onFilter={setFilter} />
       <ContactList items={visibleContacts} />
     </div>
   );
