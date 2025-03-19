@@ -25,6 +25,12 @@ export default function App() {
     });
   };
 
+  const deleteContact = contactId => {
+    setContacts(prevContacts => {
+      return prevContacts.filter(contact => contact.id !== contactId);
+    });
+  };
+
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
@@ -32,7 +38,7 @@ export default function App() {
       <ContactForm onAdd={addContact} />
 
       <SearchBox value={filter} onFilter={setFilter} />
-      <ContactList items={visibleContacts} />
+      <ContactList items={visibleContacts} onDelete={deleteContact} />
     </div>
   );
 }

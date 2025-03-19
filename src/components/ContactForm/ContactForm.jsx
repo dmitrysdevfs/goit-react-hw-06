@@ -10,13 +10,14 @@ const ContactSchema = Yup.object().shape({
 
 export default function ContactForm({ onAdd }) {
   const handleSubmit = (values, actions) => {
-    onAdd(values);
+    const contactWithId = { ...values, id: nanoid() };
+    onAdd(contactWithId);
     actions.resetForm();
   };
 
   return (
     <Formik
-      initialValues={{ id: nanoid(), name: '', number: '' }}
+      initialValues={{ name: '', number: '' }}
       onSubmit={handleSubmit}
       validationSchema={ContactSchema}
     >
