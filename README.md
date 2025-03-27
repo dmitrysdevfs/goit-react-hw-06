@@ -1,4 +1,4 @@
-# Homework Assignment 3
+# Homework Assignment 6
 
 This project is part of the **React 2.0** course in the **FSON-112** group. Іt
 is built using **Vite** and deployed on **Vercel**.
